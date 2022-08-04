@@ -1,3 +1,1 @@
-# git-try
-Git try
-Probando Git, nada especial!
+##Proyecto de una página web creada con Python en la que los estudiantes de primer año de medicina pueden encontrar información acerca de la carrera, materias, avisos, material de estudio y utilizar un foro de dudas que serán resueltas entre ellos. Se podrán crear un usuario y modificar su perfil.
