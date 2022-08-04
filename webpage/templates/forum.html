@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale= 1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0a3a5df494.js" crossorigin="anonymous"></script>
+    <link href="../static/styles/forumStyle.css" rel="stylesheet">
+    <title>Ingresando a la Facutlad</title>
+</head>
+
+<body>
+    <section class="encabezado">
+        <nav>
+            <div class="title">
+                <a href="{{ url_for('home') }}"><img src="../static/img/title5Fix.png"></a>
+            </div>
+            <div class="nav_links" id="navLinks">
+                <i class="fa fa-times" onclick="closeMenu()"></i>
+                <ul>
+                    <li>
+                        <a class="anchorsNav" href="{{ url_for('home') }}">Menu</a>
+                    </li>
+                    <li>
+                        <a class="anchorsNav" href="#">Foro</a>
+                    </li>
+                    {% if 'username' in session %}
+                    <li>
+                        <a class="anchorsNav" href="/profile">{{ session.username }}</a>
+                    </li>
+                    <li>
+                        <a href="/logout">Cerrar Sesion</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1 class="post_h1">Foro</h1>
+        <p class="post_p">Comparte tus dudas y ayuda a quien lo necesite!</p>
+    </section>
+    <section class="postHome" id="forum">
+        <div id="left">
+            <form class="container" action="" method="post" name="forum" autocomplete="off">
+                <h3 class="h3_forum">Crea una publicacion!</h3>
+                <label for="title">Titulo</label>
+                <input type="text" class="tituloForm" placeholder="Titulo" name="title" id="title"
+                    value="{{ request.form.title }}">
+                <label for="content">Contenido</label>
+                <input type="text" class="contenidoForm" placeholder="Contenido..." name="content" id="content"
+                    value="{{ request.form.content }}">
+                <input onclick="location.href='/forum'" class="botonForm" type="submit" value="Crear publicacion">
+            </form>
+            <div class="container">
+                <h3 class="h3_forum">Publicaciones!</h3>
+                {% if session.username %}
+                {% for post in posts %}
+                <div id="postUserID" class="postUser">
+                    <h4 class="h4_post"> {{ post.title }} </h4>
+                    <p class="p_post"> {{post.content}} </p>
+                    <a href="/forum/delete/{{ post.idForum }}"><i id="crossDelete" class="fa fa-times-circle"></i></a>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        </div>
+        <footer>
+            <div class="footer_container">
+                <div class="footer_content_container">
+                    <h3 class="website_logo">Ingresando a la Facultad</h3>
+                    <span class="footer_info">IALFfmed@gmail.com</span>
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_content_container">
+                        <span class="menu_titles">Legal</span>
+                        <a href="#" class="menu_item_footer">Politica de Privacidad</a>
+                        <a href="#" class="menu_item_footer">Cookies</a>
+                        <a href="#" class="menu_item_footer">Terminos y Condiciones</a>
+                    </div>
+                </div>
+                <div class="footer_content_container">
+                    <span class="menu_title">Siguenos</span>
+                    <div class="social_container">
+                        <a href="http://www.fmed.edu.uy/" class="social_link">Facultad</a>
+                        <a href="#" class="social_link">Redes</a>
+                        <a href="#" class="social_link">Contacto</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright_container">
+                <span class="copyright">&copy;2021, ingresandoalafacultad.com</span>
+            </div>
+        </footer>
+    </section>
+    <script src="../static/js/app.js"></script>
+</body>
+
+</html>
